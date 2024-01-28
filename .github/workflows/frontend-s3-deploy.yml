@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.4   # Update to a version compatible with Node.js 20
+        uses: actions/checkout@main   # Use the 'main' branch
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4   # Update to a version compatible with Node.js 20
+        uses: actions/setup-node@v3   # Use the 'v3' tag
         with:
           node-version: '20'
 
