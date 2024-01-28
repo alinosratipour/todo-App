@@ -1,4 +1,4 @@
-name: Upload Website
+name: Frontend S3 Deploy
 
 on:
  push:
