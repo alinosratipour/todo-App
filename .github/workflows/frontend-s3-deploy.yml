@@ -17,8 +17,11 @@ jobs:
         with:
           node-version: '14'  # Set this to the version in your .nvmrc file
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
+
+      - name: Install frontend dependencies
+        run: npm --prefix client install
 
       - name: Build static file
         run: npm --prefix client run build  # Adjust this if your build script is different
