@@ -28,5 +28,8 @@
     "nodemon": "^2.0.13",
     "pg": "^8.7.1",
     "react-toastify": "^8.0.3"
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
   }
 }
