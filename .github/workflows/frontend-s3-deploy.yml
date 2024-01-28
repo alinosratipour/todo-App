@@ -10,21 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
         with:
-          node-version: '14'  # Set this to the version in your .nvmrc file
+          node-version: '14'
 
-      - name: Install backend dependencies
+      - name: Install Backend Dependencies
         run: npm install
 
-      - name: Install frontend dependencies
-        run: npm --prefix client install
+      - name: Setup Node.js for Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+        working-directory: ./client  # Specify the client directory
 
-      - name: Build static file
-        run: npm --prefix client run build  # Adjust this if your build script is different
+      - name: Install Frontend Dependencies
+        run: npm install
+
+      - name: Build Frontend
+        run: npm run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
