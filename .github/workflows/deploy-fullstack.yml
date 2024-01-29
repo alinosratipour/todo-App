@@ -1,4 +1,4 @@
-name: Frontend S3 Deploy
+ame: Frontend S3 Deploy
 
 on:
 push:
