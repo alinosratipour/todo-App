@@ -27,10 +27,11 @@ jobs:
         run: rm -rf node_modules
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install 2>&1 | tee npm_install_output.log
 
-      - name: View npm debug logs
-        run: cat /home/runner/.npm/_logs/2024-01-29T22_34_23_216Z-debug.log
+      - name: View npm install output
+        run: cat npm_install_output.log
 
       - name: Debug information
         run: |
