@@ -11,10 +11,12 @@ const loginUser = require("./routes/userRoute/userLoginRoute.js");
 const dashboard = require("./routes/dashboard/dashboardRoute.js");
 const verifyAuth = require("./routes/verifyjwt");
 //middelware
-app.use(cors());
+//app.use(cors());
+app.use(cors({ origin: 'http://ali-s3-todo-app.s3-website.eu-west-2.amazonaws.com' }));
 app.use(express.json()); // allows access to req.body 
 
 //app.use(express.static("./client/build"))
+
 
 app.use("/", todos);
 app.use("/", updateTodos);
