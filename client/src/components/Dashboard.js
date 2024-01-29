@@ -6,14 +6,14 @@ function Dashboard() {
 
   async function getName() {
     try {
-      // const response = await fetch("/dashboard", {
-      //   method: "GET",
-      //   headers: { token: localStorage.token },
-      // });
-      const response = await fetch('http://18.133.221.125:5000/dashboard', {
-        method: 'GET',
+      const response = await fetch("/dashboard", {
+        method: "GET",
         headers: { token: localStorage.token },
       });
+      // const response = await fetch('http://18.133.221.125:5000/dashboard', {
+      //   method: 'GET',
+      //   headers: { token: localStorage.token },
+      // });
 
       const parseRes = await response.json();
     //console.log("this is some id",parseRes);
