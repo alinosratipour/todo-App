@@ -12,14 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node.js for Backend
-        uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-
-      - name: Install Backend Dependencies
-        run: npm install
-
       - name: Setup Node.js for Frontend
         uses: actions/setup-node@v4
         with:
@@ -29,10 +21,12 @@ jobs:
         run: |
           cd client  # Change to the client directory
           npm install
+
       - name: Build Frontend
         run: |
           cd client  # Change to the client directory
           npm run build
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -42,4 +36,4 @@ jobs:
 
       - name: Deploy static site to S3 bucket
         run: |
-          aws s3 sync ./client/build s3://ali-s3-todo-app
+          aws s3 sync ./build s3://ali-s3-todo-app
