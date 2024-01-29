@@ -12,20 +12,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node.js for Frontend
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '14'
 
-      - name: Install Frontend Dependencies
-        run: |
-          cd client  # Change to the client directory
-          npm install
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./client  # Set the working directory for this step to the client directory
 
       - name: Build Frontend
-        run: |
-          cd client  # Change to the client directory
-          npm run build
+        run: npm run build
+        working-directory: ./client  # Set the working directory for this step to the client directory
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -35,5 +33,5 @@ jobs:
           aws-region: eu-west-2
 
       - name: Deploy static site to S3 bucket
-        run: |
-          aws s3 sync ./client/build s3://ali-s3-todo-app
+        run: aws s3 sync ./build s3://ali-s3-todo-app
+        working-directory: ./client  # Set the working directory for this step to the client directory
