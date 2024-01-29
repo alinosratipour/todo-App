@@ -11,6 +11,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
+    "deploy-backend": "npm install && npm run build",
     "client": "cd client && npm start",
     "server": "concurrently \"nodemon index.js\" \"npm run client\""
   },
