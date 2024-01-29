@@ -1,4 +1,4 @@
-name: Full Stack Deployment
+name: Frontend S3 Deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  backend-deploy:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,34 +15,33 @@ jobs:
       - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Install Backend Dependencies
         run: npm install
 
-      - name: Deploy Backend to AWS
-        run: npm run deploy-backend 
-
-  frontend-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Setup Node.js for Frontend
         uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: '14'
 
       - name: Install Frontend Dependencies
         run: |
-          cd client  
+          cd client # Change to the client directory
           npm install
 
       - name: Build Frontend
         run: |
-          cd client  
+          cd client # Change to the client directory
           npm run build
 
-      - name: Deploy Frontend to AWS S3
-        run: aws s3 sync ./client/build s3://your-s3-bucket  
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+
+      - name: Deploy static site to S3 bucket
+        run: |
+          aws s3 sync ./client/build s3://ali-s3-todo-app
