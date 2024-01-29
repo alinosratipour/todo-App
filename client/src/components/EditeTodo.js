@@ -15,11 +15,16 @@ const updateDescription = async (e) =>{
     e.preventDefault();
 try {
     const body = {description};
-   await fetch(`/todos/${todo.todo_id}`,{
-       method: "PUT",
-       headers: {"Content-Type": "application/json"},
-       body: JSON.stringify(body)
-   });
+  //  await fetch(`/todos/${todo.todo_id}`,{
+  //      method: "PUT",
+  //      headers: {"Content-Type": "application/json"},
+  //      body: JSON.stringify(body)
+  //  });
+  await fetch(`/http://18.133.221.125:5000/todos/${todo.todo_id}`,{
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(body)
+});
    window.location = "/dashboard";
 } catch (err) {
     console.error(err.message);

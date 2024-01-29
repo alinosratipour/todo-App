@@ -21,22 +21,34 @@ function Signup() {
   const userSchema = yup.object().shape({
     firstname: yup.string().required("First Name is required"),
     lastname: yup.string().required("Last Name is required"),
-    email: yup.string().email("Email is not valid").required("Email is required"),
+    email: yup
+      .string()
+      .email("Email is not valid")
+      .required("Email is required"),
     password: yup.string().min(8).max(20).required("Password is required"),
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(userSchema),
   });
 
   const onSubmitForm = async (data) => {
     try {
-      const response = await fetch("/signup", {
+      // const response = await fetch("/signup", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(data),
+      // });
+
+      const response = await fetch("http://18.133.221.125:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       const parsedResponse = await response.json();
       if (parsedResponse.token) {
         localStorage.setItem("token", parsedResponse.token);

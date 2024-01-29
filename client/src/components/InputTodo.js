@@ -19,11 +19,17 @@ function InputTodo() {
         try {
 
             const body = {description};
-              await fetch("/todos",{
-            method:"POST",
-            headers:{"Content-type": "application/json"},
-            body:JSON.stringify(body)
-            });
+            //   await fetch("/todos",{
+            // method:"POST",
+            // headers:{"Content-type": "application/json"},
+            // body:JSON.stringify(body)
+            // });
+
+            await fetch("http://18.133.221.125:5000/todos",{
+                method:"POST",
+                headers:{"Content-type": "application/json"},
+                body:JSON.stringify(body)
+                });
            window.location = "/Dashboard" ;
         } catch (err) {
            console.error(err.message); 
