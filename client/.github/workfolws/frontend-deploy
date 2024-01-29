@@ -17,11 +17,13 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install Dependencies and Build Frontend
-        run: |
-          cd client  # Change to the client directory
-          npm install
-          npm run build
+      - name: Install Frontend Dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: Build Frontend
+        working-directory: ./client
+        run: npm run build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -31,6 +33,4 @@ jobs:
           aws-region: eu-west-2
 
       - name: Deploy static site to S3 bucket
-        run: |
-          cd client/build  # Change to the build directory in the client
-          aws s3 sync . s3://ali-s3-todo-app
+        run: aws s3 sync ./client/build s3://ali-s3-todo-app
