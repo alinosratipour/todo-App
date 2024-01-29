@@ -36,4 +36,4 @@ jobs:
 
       - name: Deploy static site to S3 bucket
         run: |
-          aws s3 sync ./build s3://ali-s3-todo-app
+          aws s3 sync ./client/build s3://ali-s3-todo-app
