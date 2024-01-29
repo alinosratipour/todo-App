@@ -6,20 +6,21 @@ on:
       - main
 
 jobs:
-  deploy:
+  Deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: "14"
 
-      - name: Install dependencies
+      - name: Install Backend Dependencies
         run: npm install
 
-      - name: Build and deploy backend
-        run: npm run deploy-backend
+      - name: Deploy Backend
+        run: |
+          cd $GITHUB_WORKSPACE  # Change to the root directory
+          npm run deploy-backend
