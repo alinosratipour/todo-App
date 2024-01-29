@@ -20,14 +20,14 @@ jobs:
       - name: Set up Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: 14.17.0
+          node-version: 10.x
           cache: 'npm'
 
       - name: Clean node_modules
         run: rm -rf node_modules
 
       - name: Update npm
-        run: npm install -g npm@latest
+        run: npm install -g npm@20.5.0
 
       - name: Install Dependencies
         run: npm ci
