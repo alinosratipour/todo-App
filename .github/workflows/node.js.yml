@@ -21,15 +21,16 @@ jobs:
           aws-region: eu-west-2
 
       - name: Set up SSH
-        uses: appleboy/ssh-action@master
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          username: ubuntu
-          host: 18.133.221.125
-          port: 22
-          script: |
-            cd ~/todo-App
-            git pull origin main
+        run: |
+          mkdir -p ~/.ssh
+          echo -e "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          touch ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          ssh-keyscan -H github.com >> ~/.ssh/known_hosts  # Add GitHub's host key
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
 
       - name: Deploy to EC2
-        run: echo "Deployment completed."
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@your-ec2-ip "cd ~/todo-App && git pull origin main"
