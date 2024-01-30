@@ -34,7 +34,7 @@ if(process.env.NODE_ENV === "production"){
 app.get("/todos/:id", async(req, res) => {
 const {id} = req.params;
 try{
-const findtodo = await pool.query("SELECT * FROM todo_tbl WHERE todo_id = $1",[id]);
+const findtodo = await pool.query("SELECT * FROM mytodo WHERE todo_id = $1",[id]);
     res.json(findtodo.rows[0]);
 }catch(err){
     console.error(err.message);
@@ -48,7 +48,7 @@ app.delete("/todos/:id" , async (req, res)=>{
 
     try{ 
       const { id } = req.params;
-      const deleteTodo = pool.query("DELETE FROM todo_tbl WHERE todo_id = $1",
+      const deleteTodo = pool.query("DELETE FROM mytodo WHERE todo_id = $1",
        [id]
        );
       //res.json("Todo Deleted");

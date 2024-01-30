@@ -7,7 +7,7 @@ router.post("/todos", async (req, res) => {
    try {
      const { description } = req.body;
      const newtodo = await pool.query(
-       "INSERT INTO todo_tbl (description) VALUES($1) RETURNING * ",
+       "INSERT INTO mytodo (description) VALUES($1) RETURNING * ",
        [description]
      );
      res.json(newtodo.rows[0]);
