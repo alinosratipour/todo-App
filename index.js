@@ -11,6 +11,7 @@ const loginUser = require("./routes/userRoute/userLoginRoute.js");
 const dashboard = require("./routes/dashboard/dashboardRoute.js");
 const verifyAuth = require("./routes/verifyjwt");
 //middelware
+app.options('*', cors());
 app.use(cors());
 app.use(express.json()); // allows access to req.body 
 
