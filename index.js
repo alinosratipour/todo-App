@@ -19,7 +19,7 @@ app.use(
     allowedHeaders: "Content-Type",
   })
 );
-app.use(cors());
+/// app.use(cors());
 app.use(express.json()); // allows access to req.body
 
 //app.use(express.static("./client/build"))
