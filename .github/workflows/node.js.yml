@@ -23,8 +23,9 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo -e "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          chmod 644 ~/.ssh/known_hosts
           ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
           ssh-keygen -R 18.133.221.125
           eval $(ssh-agent -s)
