@@ -20,16 +20,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
 
-      - name: Set up SSH agent
-        uses: appleboy/ssh-action@master
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          username: ubuntu
-          host: 18.133.221.125
-          port: 22
-          script: |
-            cd ~/todo-App
-            git pull origin main
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
+          ssh-keygen -R 18.133.221.125
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
 
       - name: Deploy to EC2
-        run: echo "Deployment completed."
+        run: |
+          ssh ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main"
