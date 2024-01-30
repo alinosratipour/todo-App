@@ -31,7 +31,7 @@ function Signup() {
 
   const onSubmitForm = async (data) => {
     try {
-      const response = await fetch("/signup", {
+      const response = await fetch("http://18.133.221.125:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
