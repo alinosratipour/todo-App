@@ -20,11 +20,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
 
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.5.0
+      - name: Set up SSH agent
+        uses: appleboy/ssh-action@master
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ubuntu
+          host: 18.133.221.125
+          port: 22
+          script: |
+            cd ~/todo-App
+            git pull origin main
 
       - name: Deploy to EC2
-        run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main"
+        run: echo "Deployment completed."
