@@ -6,36 +6,25 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: 14.x
-          cache: 'npm'
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
 
-      - name: Clean node_modules
-        run: rm -rf node_modules
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Install Dependencies
+      - name: Deploy to EC2
         run: |
-          npm install 2>&1 | tee npm_install_output.log
-
-      - name: View npm install output
-        run: cat npm_install_output.log
-
-      - name: Debug information
-        run: |
-          node --version
-          npm --version
-          npm list bcrypt
-          ls -al
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@18.133.221.125 "cd ~/todo-App && git pull origin main"
