@@ -11,7 +11,14 @@ const loginUser = require("./routes/userRoute/userLoginRoute.js");
 const dashboard = require("./routes/dashboard/dashboardRoute.js");
 const verifyAuth = require("./routes/verifyjwt");
 //middelware
+
+
 app.options('*', cors());
+app.use(cors({
+    origin: 'http://ali-s3-todo-app.s3-website.eu-west-2.amazonaws.com',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type',
+  }));
 app.use(cors());
 app.use(express.json()); // allows access to req.body 
 
