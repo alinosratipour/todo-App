@@ -17,8 +17,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
       - name: Deploy to EC2
         run: |
-         ssh -v -o StrictHostKeyChecking=no ubuntu@ec2-18-133-221-125.eu-west-2.compute.amazonaws.com "cd ~/todo-App && git pull origin main"
+          ssh -v -o StrictHostKeyChecking=no ubuntu@ec2-18-133-221-125.eu-west-2.compute.amazonaws.com "cd ~/todo-App && git pull origin main"
