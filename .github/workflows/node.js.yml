@@ -13,12 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create SSH directory
-        run: mkdir -p ~/.ssh
-        shell: bash
-
-      - name: Create private key file
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+      - name: Copy id_rsa from local machine
+        run: scp -o StrictHostKeyChecking=no user@your_local_machine_ip:~/.ssh/id_rsa ~/.ssh/id_rsa
         shell: bash
 
       - name: Set correct permissions
