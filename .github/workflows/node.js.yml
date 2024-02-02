@@ -19,14 +19,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo -e "Host 18.133.221.125\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-          cat ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
           ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
-          cat ~/.ssh/known_hosts
-
-      - name: Remove sensitive content
-        run: |
-          rm -f ~/.ssh/id_rsa
-          echo "Sensitive content removed."
+          cat ~/.ssh/id_rsa.pub
 
       - name: Copy files to EC2
         run: scp -o StrictHostKeyChecking=no -r ./ ubuntu@18.133.221.125:~/todo-App
