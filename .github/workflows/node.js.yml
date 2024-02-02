@@ -24,7 +24,10 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./ ubuntu@18.133.221.125:~/todo-App
+
+      - name: SSH into EC2, pull changes, and restart
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main && npm install && pm2 restart todo-App"
