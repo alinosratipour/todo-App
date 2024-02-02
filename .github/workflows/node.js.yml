@@ -21,11 +21,7 @@ jobs:
           ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
 
       - name: Copy files to EC2
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./ ubuntu@18.133.221.125:~/todo-App
 
       - name: SSH into EC2, pull changes, and restart
