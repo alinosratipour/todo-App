@@ -6,7 +6,7 @@ const auhorization = require("../../middleware/authorization");
 //auhorization,
 router.get("/dashboard", async (req, res) => {
   try {
-    //req.user has the payload
+    //req.user has the payloa
 
     const user = await pool.query(
       " SELECT firstname FROM users   WHERE id = $1",
