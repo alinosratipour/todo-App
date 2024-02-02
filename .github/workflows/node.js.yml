@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: Deploy
 
 on:
   push:
@@ -10,22 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-2
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/my_custom_key
+        chmod 600 ~/.ssh/my_custom_key
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/my_custom_key
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        SSH_AGENT_PID: $SSH_AGENT_PID
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.5.2
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-
-      - name: Deploy to EC2
-        run: |
-         ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-133-221-125.eu-west-2.compute.amazonaws.com "cd ~/todo-App && git pull origin main"
+    - name: SSH into EC2 instance and pull changes
+      run: |
+        ssh -o StrictHostKeyChecking=no -i /tmp/ssh_agent.sock ubuntu@ec2-18-133-221-125.eu-west-2.compute.amazonaws.com "cd ~/todo-App && git pull origin main"
+      env:
+        AWS_DEFAULT_REGION: eu-west-2
+        AWS_REGION: eu-west-2
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
