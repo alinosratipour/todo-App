@@ -27,4 +27,4 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          scp -o StrictHostKeyChecking=no -i <(echo "$SSH_PRIVATE_KEY") -r ./ ubuntu@18.133.221.125:~/todo-App
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./ ubuntu@18.133.221.125:~/todo-App
