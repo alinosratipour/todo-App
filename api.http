@@ -1,0 +1,12 @@
+@base_url = http://18.133.221.125:5000
+
+### POST Request for Signup
+GET {{base_url}}/dashboard
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "email": "john.doe@example.com",
+  "password": "securepassword"
+}
