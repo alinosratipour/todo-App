@@ -23,10 +23,18 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
 
+      - name: SCP files via ssh key
+        uses: appleboy/scp-action@master
+        env:
+          USERNAME: ubuntu
+          HOST: 18.133.221.125
+          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        with:
+          source: './*'
+          target: '/home/ubuntu/todo-App/'
       - name: SSH into EC2, pull changes, and restart
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
-          cat private_key
-          ssh  -i private_key ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main && npm install && pm2 restart todo-App"
+          ssh  -i private_key ubuntu@18.133.221.125 "cd ~/todo-App && npm install && pm2 restart todo-App"
