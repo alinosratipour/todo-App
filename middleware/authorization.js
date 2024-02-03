@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
   const jwtToken = req.header("token");
 
   if (!jwtToken) {
-    return res.status(403).send("The is no valid token test");
+    return res.status(403).send("The is no valid token");
   }
   try {
     const payload = jwt.verify(jwtToken, process.env.jwtSecret);
