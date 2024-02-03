@@ -25,5 +25,5 @@ jobs:
 
       - name: SSH into EC2, pull changes, and restart
         run: |
-          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          echo "$SSH_PRIVATE_KEY\n" > private_key && chmod 600 private_key
           ssh  -i private_key ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main && npm install && pm2 restart todo-App"
