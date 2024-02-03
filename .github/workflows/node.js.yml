@@ -23,15 +23,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
 
-      # - name: Copy files to EC2
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-      #     chmod 600 ~/.ssh/id_rsa
-      #     sudo scp  -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./ ubuntu@18.133.221.125:~/todo-App
-
       - name: SSH into EC2, pull changes, and restart
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main && npm install && pm2 restart todo-App"
+          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh  -i private_key ubuntu@18.133.221.125 "cd ~/todo-App && git pull origin main && npm install && pm2 restart todo-App"
