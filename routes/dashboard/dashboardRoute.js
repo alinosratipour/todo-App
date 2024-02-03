@@ -3,7 +3,7 @@ const router = express.Router();
 const pool = require("../../db");
 const auhorization = require("../../middleware/authorization");
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", auhorization, async (req, res) => {
   try {
     //req.user has the payload
 
