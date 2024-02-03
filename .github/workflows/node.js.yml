@@ -26,9 +26,9 @@ jobs:
       - name: SCP files via ssh key
         uses: appleboy/scp-action@master
         env:
-          USERNAME: ubuntu
-          HOST: 18.133.221.125
-          KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ubuntu
+          host: 18.133.221.125
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
         with:
           source: './*'
           target: '/home/ubuntu/todo-App/'
