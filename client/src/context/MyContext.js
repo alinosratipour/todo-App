@@ -9,7 +9,7 @@ function ToDoContextProvider(props){
     // Delete Function
  const deleteTodo = async(id) =>{
      try {
-          await fetch(`/todos/${id}`,{
+          await fetch(`http://18.133.221.125:5000/todos/${id}`,{
              method: "DELETE"
          });
          
@@ -23,7 +23,7 @@ function ToDoContextProvider(props){
      
      const listAlltodos = async() =>{
          try {    
-            const response =  await fetch("/todos");
+            const response =  await fetch("http://18.133.221.125:5000/todos");
             const jsonData =  await response.json();
             setTodo(jsonData);
           } catch (err) {
