@@ -6,11 +6,12 @@ const auhorization = require("../../middleware/authorization");
 router.get("/dashboard", async (req, res) => {
   try {
     //req.user has the payload
-
+    console.log("User ID:", req.user);
     const user = await pool.query(
       " SELECT firstname FROM users   WHERE id = $1",
       [req.user]
     );
+    console.log("User Data:", user.rows[0]);
     res.json(user.rows[0]);
   } catch (err) {
     console.error(err.message);
