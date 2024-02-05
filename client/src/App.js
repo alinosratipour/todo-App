@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import SecureRoute from "./components/SecureRoute";
 import NavBar from "./components/NavBar";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
             <Switch>
               <Route exact path="/signup" render={() => <Signup />} />
               <SecureRoute exact path="/login" />
-              <SecureRoute exact path="/dashboard" />
+              {/* <SecureRoute exact path="/dashboard" /> */}
+              <Route exact path="/dashboard" render={() => <Dashboard />} />
             </Switch>
           </div>
         </Router>

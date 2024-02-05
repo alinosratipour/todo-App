@@ -1,4 +1,4 @@
-import React, {Fragment,useEffect,useState} from 'react'
+import React, { Fragment, useEffect, useState } from "react";
 import InputTodo from "./InputTodo";
 import ListTodos from "./ListTodos";
 function Dashboard() {
@@ -20,25 +20,25 @@ function Dashboard() {
 
   useEffect(() => {
     getName();
-  },[]);
+  }, []);
 
   return (
     <Fragment>
-     <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <h1>Dashboard</h1>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <h1>Dashboard</h1>
+          </div>
+          <div className="col-md-6">
+            <h2>Welcome {name}</h2>
+          </div>
         </div>
-        <div className="col-md-6">
-          <h2>Welcome {name}</h2>
-        </div>
-      </div>
 
-      <InputTodo />
-          <ListTodos />
+        <InputTodo />
+        <ListTodos />
       </div>
     </Fragment>
   );
 }
 
-export default Dashboard
+export default Dashboard;
