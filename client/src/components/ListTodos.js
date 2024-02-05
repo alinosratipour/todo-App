@@ -13,7 +13,7 @@ const {todo,deleteTodo} = useContext(MyContext);
       <tr>
         <th>Description</th>
         <th>Edite</th>
-        <th>Delete</th>
+        <th>Deletee</th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@ const {todo,deleteTodo} = useContext(MyContext);
         <td><button className="btn btn-danger"
          onClick= {() => deleteTodo(item.todo_id)}
         
-        >Deletee</button></td>
+        >Delete</button></td>
       </tr>
       
       ))}
