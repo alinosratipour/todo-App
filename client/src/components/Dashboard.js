@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import InputTodo from "./InputTodo";
 import ListTodos from "./ListTodos";
+
 function Dashboard() {
   const [name, setName] = useState("");
 
@@ -8,35 +9,15 @@ function Dashboard() {
     try {
       const response = await fetch("http://18.133.221.125:5000/dashboard", {
         method: "GET",
-        headers: { token: localStorage.token },
+        // No need for headers if token is not required
       });
-  
-      console.log("Token:", localStorage.token);
-      console.log("Response:", response);
-  
-      // Check if the response is not OK
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      // Check if the response has content-type JSON
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Invalid content type. Expected JSON.");
-      }
-  
-      // Parse the response only if it has content
-      const responseBody = await response.text();
-      const parseRes = responseBody ? JSON.parse(responseBody) : {};
-  
-      console.log("Parsed Response:", parseRes);
-  
+
+      const parseRes = await response.json();
       setName(parseRes.firstname);
     } catch (err) {
       console.error(err.message);
     }
   }
-  
 
   useEffect(() => {
     getName();
