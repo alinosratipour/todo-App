@@ -11,7 +11,7 @@ function Dashboard() {
         headers: { token: localStorage.token },
       });
       console.log("Token:", localStorage.token);
-
+      console.log("Response:", response);
       const parseRes = await response.json();
       setName(parseRes.firstname);
     } catch (err) {
