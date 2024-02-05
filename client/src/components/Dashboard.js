@@ -6,7 +6,7 @@ function Dashboard() {
 
   async function getName() {
     try {
-      const response = await fetch("http://18.133.221.125:5000/dashboarddd", {
+      const response = await fetch("http://18.133.221.125:5000/dashboard", {
         method: "GET",
         headers: { token: localStorage.token },
       });
