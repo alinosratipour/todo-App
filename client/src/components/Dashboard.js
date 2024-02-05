@@ -13,6 +13,7 @@ function Dashboard() {
       console.log("Token:", localStorage.token);
       console.log("Response:", response);
       const parseRes = await response.json();
+      console.log("pars",parseRes);
       setName(parseRes.firstname);
     } catch (err) {
       console.error(err.message);
