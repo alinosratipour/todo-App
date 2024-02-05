@@ -10,15 +10,33 @@ function Dashboard() {
         method: "GET",
         headers: { token: localStorage.token },
       });
+  
       console.log("Token:", localStorage.token);
       console.log("Response:", response);
-      const parseRes = await response.json();
-      console.log("pars",parseRes);
+  
+      // Check if the response is not OK
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      // Check if the response has content-type JSON
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Invalid content type. Expected JSON.");
+      }
+  
+      // Parse the response only if it has content
+      const responseBody = await response.text();
+      const parseRes = responseBody ? JSON.parse(responseBody) : {};
+  
+      console.log("Parsed Response:", parseRes);
+  
       setName(parseRes.firstname);
     } catch (err) {
       console.error(err.message);
     }
   }
+  
 
   useEffect(() => {
     getName();
