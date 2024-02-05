@@ -10,6 +10,7 @@ function Dashboard() {
         method: "GET",
         headers: { token: localStorage.token },
       });
+      console.log("Token:", localStorage.token);
 
       const parseRes = await response.json();
       setName(parseRes.firstname);
@@ -30,7 +31,7 @@ function Dashboard() {
             <h1>Dashboard</h1>
           </div>
           <div className="col-md-6">
-            <h2>Welcome {name}</h2>
+            <h2>Welcome {name || "Guest"}</h2>
           </div>
         </div>
 
