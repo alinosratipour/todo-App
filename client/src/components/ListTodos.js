@@ -30,7 +30,7 @@ const {todo,deleteTodo} = useContext(MyContext);
         <td><button className="btn btn-danger"
          onClick= {() => deleteTodo(item.todo_id)}
         
-        >Delete</button></td>
+        >Deletee</button></td>
       </tr>
       
       ))}
