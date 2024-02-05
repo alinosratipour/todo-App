@@ -15,7 +15,7 @@ const updateDescription = async (e) =>{
     e.preventDefault();
 try {
     const body = {description};
-   await fetch(`http://18.133.221.125:5000/login/${todo.todo_id}`,{
+   await fetch(`http://18.133.221.125:5000/todos/${todo.todo_id}`,{
        method: "PUT",
        headers: {"Content-Type": "application/json"},
        body: JSON.stringify(body)
