@@ -12,7 +12,6 @@ function Dashboard() {
       });
 
       const parseRes = await response.json();
-    console.log("this is some id",parseRes);
       setName(parseRes.firstname);
     } catch (err) {
       console.error(err.message);
