@@ -1,19 +1,20 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import InputTodo from "./InputTodo";
 import ListTodos from "./ListTodos";
-
-
 function Dashboard() {
-  const [name, setName] = useState(""); // State to store the user's name
+  const [name, setName] = useState("");
+
   async function getName() {
     try {
       const response = await fetch("http://18.133.221.125:5000/dashboard", {
         method: "GET",
-        headers: { token: localStorage.token },
+       // headers: { token: localStorage.token },
+       // headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-
+      console.log("Token:", localStorage.token);
+      console.log("Response:", response);
       const parseRes = await response.json();
-    //console.log("this is some id",parseRes);
+      console.log("Parsed Response:", parseRes);
       setName(parseRes.firstname);
     } catch (err) {
       console.error(err.message);
@@ -22,8 +23,8 @@ function Dashboard() {
 
   useEffect(() => {
     getName();
-  },[]);
- 
+  }, []);
+
   return (
     <Fragment>
       <div className="container">
@@ -32,12 +33,10 @@ function Dashboard() {
             <h1>Dashboard</h1>
           </div>
           <div className="col-md-6">
-            {/* Display the user's name */}
             <h2>Welcome {name || "Guest"}</h2>
           </div>
         </div>
 
-        {/* Pass the handleLogin function to the login component */}
         <InputTodo />
         <ListTodos />
       </div>

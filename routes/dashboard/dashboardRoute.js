@@ -20,20 +20,23 @@
 // });
 
 // module.exports = router;
-
 const express = require("express");
 const router = express.Router();
 const pool = require("../../db");
-const auhorization = require("../../middleware/authorization");
 
-router.get("/dashboard", auhorization, async (req, res) => {
+router.get("/dashboard", async (req, res) => {
   try {
-    //req.user has the payload
+    // Assuming the user ID is sent as a query parameter, change as needed
+    const userId = req.query.userId;
 
     const user = await pool.query(
-      " SELECT firstname FROM users   WHERE id = $1",
-      [req.user]
+      "SELECT firstname FROM users WHERE id = $1",
+      [userId]
     );
+
+    console.log("User ID:", userId);
+    console.log("User Data:", user.rows[0]);
+
     res.json(user.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -42,6 +45,3 @@ router.get("/dashboard", auhorization, async (req, res) => {
 });
 
 module.exports = router;
-
-
-
