@@ -8,7 +8,7 @@ function Dashboard() {
     try {
       const response = await fetch("http://18.133.221.125:5000/dashboard", {
         method: "GET",
-       // headers: { token: localStorage.token },
+        headers: { token: localStorage.token },
        // headers: { Authorization: `Bearer ${localStorage.token}` },
       });
       console.log("Token:", localStorage.token);
