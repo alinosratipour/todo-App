@@ -32,10 +32,11 @@ function Login() {
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
 
-        history.push({
-          pathname: "/dashboard",
-          state: { userId: parseRes.userId },
-        });
+        // history.push({
+        //   pathname: "/dashboard",
+        //   state: { userId: parseRes.userId },
+        // });
+        history.push("/dashboard", { userId: parseRes.userId });
         toast.success(" login was Successful");
       } else {
         toast.error(parseRes);
