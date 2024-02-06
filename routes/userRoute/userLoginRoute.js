@@ -4,37 +4,37 @@ const pool = require("../../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../../utils/jwtGenerator");
 const authorization = require("../../middleware/authorization");
+
 // Login Route
 router.post("/login", async (req, res) => {
   try {
-    // Destracture the req.body
+    // Destructure the req.body
     const { email, password } = req.body;
 
-    // Check if user does not exist
+    // Check if user exists
     const userPass = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
-    // check to see if password is correct
+
+    // Check if user does not exist
     if (userPass.rows.length === 0) {
-      return res.status(401).json("user does not exist");
+      return res.status(401).json("User does not exist");
     }
 
-    // if everything is ok then give user jwt
-
+    // Check if password is correct
     const validPassword = await bcrypt.compare(
       password,
       userPass.rows[0].password
     );
     if (!validPassword) {
-      return res.status(401).json("Password or email is Wrong");
+      return res.status(401).json("Password or email is wrong");
     }
 
-    // const token = jwtGenerator(userPass.rows[0].id);
-    // res.json({token});
-    res.json({ token: "login sucess" , userId: user.rows[0].id });
+    // If everything is okay, provide the user's ID in the response
+    res.json({ token: "login success", userId: userPass.rows[0].id });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("server error");
+    res.status(500).send("Server error");
   }
 });
 
