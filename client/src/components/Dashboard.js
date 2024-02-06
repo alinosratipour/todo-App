@@ -9,7 +9,7 @@ function Dashboard() {
     // Function to fetch the user's data from the backend
     const fetchUserData = async () => {
       try {
-        const userId = localStorage.getItem("userId"); // Retrieve user ID from localStorage
+        const userId = localStorage.getItem("token"); // Retrieve user ID from localStorage
 console.log("user id",userId);
         const response = await fetch("http://18.133.221.125:5000/dashboard", {
           method: "GET",

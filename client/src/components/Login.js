@@ -31,7 +31,6 @@ function Login() {
 
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        localStorage.setItem("userId", parseRes.userId);
         history.push("/dashboard");
         toast.success(" login was Successful");
       } else {
