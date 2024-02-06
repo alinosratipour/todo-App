@@ -18,7 +18,7 @@ console.log("AAAA",localStorage.token );
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setName(data.firstname); // Assuming the response contains the user's firstname
+          setName(data.firstname); 
         } else {
           console.error("Failed to fetch user's data");
         }
@@ -39,7 +39,7 @@ console.log("AAAA",localStorage.token );
             <h1>Dashboard</h1>
           </div>
           <div className="col-md-6">
-            <h2>Welcome {name || "Guest"}</h2>
+            <h2>Welcome {name}</h2>
           </div>
         </div>
 
