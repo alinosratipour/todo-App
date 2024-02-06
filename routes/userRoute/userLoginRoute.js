@@ -30,6 +30,7 @@ router.post("/login",authorization, async (req, res) => {
     }
 
      const token = jwtGenerator(userPass.rows[0].id);
+     console.log("my token",token);
      res.json({token});
    // res.json({ token: "login sucess" });
   } catch (err) {
