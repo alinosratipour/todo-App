@@ -29,9 +29,10 @@ router.post("/login",async (req, res) => {
       return res.status(401).json("Password or email is Wrong");
     }
 
-    const token = jwtGenerator(userPass.rows[0].id);
-     console.log("my token",token);
-     res.json({token});
+    //const token = jwtGenerator(userPass.rows[0].id);
+   
+    // res.json({token});
+     res.json({token: userPass.rows[0].id});
   // res.json({ token: "login sucess" });
   } catch (err) {
     console.error(err.message);
