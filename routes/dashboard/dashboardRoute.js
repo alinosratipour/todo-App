@@ -20,14 +20,15 @@
 // });
 
 // module.exports = router;
+
 const express = require("express");
 const router = express.Router();
 const pool = require("../../db");
 
 router.get("/dashboard", async (req, res) => {
   try {
-    // Assuming the user ID is sent as a query parameter, change as needed
-    const userId = req.query.userId;
+    // Assuming you're using some form of authentication middleware that sets req.user
+    const userId = req.user;
 
     const user = await pool.query(
       "SELECT firstname FROM users WHERE id = $1",

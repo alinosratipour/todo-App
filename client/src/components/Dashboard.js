@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import InputTodo from "./InputTodo";
 import ListTodos from "./ListTodos";
+
 function Dashboard() {
   const [name, setName] = useState("");
 
@@ -8,10 +9,9 @@ function Dashboard() {
     try {
       const response = await fetch("http://18.133.221.125:5000/dashboard", {
         method: "GET",
-       // headers: { token: localStorage.token },
-       // headers: { Authorization: `Bearer ${localStorage.token}` },
+        headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-      console.log("Token:", localStorage.token);
+
       console.log("Response:", response);
       const parseRes = await response.json();
       console.log("Parsed Response:", parseRes);
