@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
 
     // const token = jwtGenerator(userPass.rows[0].id);
     // res.json({token});
-    res.json({ token: "login sucess" });
+    res.json({ token: "login sucess" , userId: user.rows[0].id });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server error");
