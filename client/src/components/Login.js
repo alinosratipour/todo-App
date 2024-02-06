@@ -30,11 +30,12 @@ function Login() {
 
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        // Redirect to dashboard with userId included in state
-        history.push("/dashboard", { userId: parseRes.userId });
-        toast.success("Login was successful");
+
+        history.push("/dashboard");
+        toast.success(" login was Successful");
       } else {
         toast.error(parseRes);
+  
       }
     } catch (err) {
       console.error(err.message);
