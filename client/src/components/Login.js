@@ -28,7 +28,7 @@ function Login() {
         body: JSON.stringify(body),
       });
       const parseRes = await response.json();
-
+      console.log("parseRes", parseRes);
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
 
@@ -39,7 +39,6 @@ function Login() {
         toast.success(" login was Successful");
       } else {
         toast.error(parseRes);
-  
       }
     } catch (err) {
       console.error(err.message);
@@ -48,28 +47,28 @@ function Login() {
 
   return (
     <Fragment>
-    <div className="d-flex align-items-center justify-content-center vh-100">
-      <form onSubmit={onSubmitForm} className="text-center col-5">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="form-control my-3"
-          value={email}
-          onChange={(e) => onChange(e)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="form-control my-3"
-          value={password}
-          onChange={(e) => onChange(e)}
-        />
-        <button className="btn btn-success btn-block">Submit</button>
-      </form>
-    </div>
-  </Fragment>
+      <div className="d-flex align-items-center justify-content-center vh-100">
+        <form onSubmit={onSubmitForm} className="text-center col-5">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="form-control my-3"
+            value={email}
+            onChange={(e) => onChange(e)}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="form-control my-3"
+            value={password}
+            onChange={(e) => onChange(e)}
+          />
+          <button className="btn btn-success btn-block">Submit</button>
+        </form>
+      </div>
+    </Fragment>
   );
 }
 
