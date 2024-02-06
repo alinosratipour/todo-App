@@ -10,6 +10,7 @@ function Dashboard() {
     const fetchUserData = async () => {
       try {
         const userId = localStorage.getItem("userId"); // Retrieve user ID from localStorage
+console.log("user id",userId);
         const response = await fetch("http://18.133.221.125:5000/dashboard", {
           method: "GET",
           headers: {
@@ -19,6 +20,7 @@ function Dashboard() {
 
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setName(data.firstname); // Assuming the response contains the user's firstname
         } else {
           console.error("Failed to fetch user's data");
