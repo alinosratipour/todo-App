@@ -7,7 +7,7 @@ function Dashboard() {
   const [name, setName] = useState(""); // State to store the user's name
   async function getName() {
     try {
-      const response = await fetch("/dashboard", {
+      const response = await fetch("http://18.133.221.125:5000/dashboard", {
         method: "GET",
         headers: { token: localStorage.token },
       });
