@@ -14,10 +14,9 @@ function Dashboard() {
           method: "GET",
           headers: { token: localStorage.token },
         });
-console.log("AAAA",localStorage.token );
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          console.log("DATA",data);
           setName(data.firstname); 
         } else {
           console.error("Failed to fetch user's data");
