@@ -11,16 +11,24 @@ function Dashboard() {
         method: "GET",
         headers: { Authorization: `Bearer ${localStorage.token}` },
       });
-
+  
       console.log("Response:", response);
       const parseRes = await response.json();
+  
       console.log("Parsed Response:", parseRes);
-      setName(parseRes.firstname);
+  
+      // Check if the firstname property exists in the parsed response
+      if (parseRes.firstname) {
+        setName(parseRes.firstname);
+      } else {
+        console.error("Firstname not found in response:", parseRes);
+        // Handle the case where the firstname property is missing in the response
+      }
     } catch (err) {
       console.error(err.message);
     }
   }
-
+  
   useEffect(() => {
     getName();
   }, []);
