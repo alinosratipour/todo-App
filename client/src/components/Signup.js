@@ -21,11 +21,18 @@ function Signup() {
   const userSchema = yup.object().shape({
     firstname: yup.string().required("First Name is required"),
     lastname: yup.string().required("Last Name is required"),
-    email: yup.string().email("Email is not valid").required("Email is required"),
+    email: yup
+      .string()
+      .email("Email is not valid")
+      .required("Email is required"),
     password: yup.string().min(8).max(20).required("Password is required"),
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(userSchema),
   });
 
