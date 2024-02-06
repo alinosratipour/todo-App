@@ -27,7 +27,7 @@ const pool = require("../../db");
 router.get("/dashboard", async (req, res) => {
   try {
     // Assuming the user ID is sent as a query parameter, change as needed
-    const userId = req.query.userId;
+    const userId = req.query.token;
 
     const user = await pool.query(
       "SELECT firstname FROM users WHERE id = $1",
