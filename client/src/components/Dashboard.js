@@ -1,22 +1,20 @@
 import React, { Fragment, useState, useEffect } from "react";
 import InputTodo from "./InputTodo";
 import ListTodos from "./ListTodos";
-import { useLocation } from "react-router-dom";
+
 
 function Dashboard() {
   const [name, setName] = useState(""); // State to store the user's name
-  const location = useLocation();
-
+ 
   useEffect(() => {
     // Function to fetch the user's data from the backend
     const fetchUserData = async () => {
       try {
-        const userId = location.state.userId;
+      
         const response = await fetch("http://18.133.221.125:5000/dashboard", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${localStorage.token}`,
-            "User-Id": userId, // Add the user ID to the headers
+            headers: { token: localStorage.token },
           },
         });
 
