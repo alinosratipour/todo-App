@@ -4,26 +4,33 @@ import ListTodos from "./ListTodos";
 function Dashboard() {
   const [name, setName] = useState("");
 
-  async function getName() {
-    try {
-      const response = await fetch("http://18.133.221.125:5000/dashboard", {
-        method: "GET",
-        headers: { token: localStorage.token },
-       // headers: { Authorization: `Bearer ${localStorage.token}` },
-      });
-      console.log("Token:", localStorage.token);
-      console.log("Response:", response);
-      const parseRes = await response.json();
-      console.log("Parsed Response:", parseRes);
-      setName(parseRes.firstname);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
 
   useEffect(() => {
-    getName();
-  }, []);
+    // Function to fetch the user's data from the backend
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem("userId"); // Retrieve user ID from localStorage
+        const response = await fetch("http://18.133.221.125:5000/dashboard", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${userId}`, // Pass user ID as authorization header
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setName(data.firstname); // Assuming the response contains the user's firstname
+        } else {
+          console.error("Failed to fetch user's data");
+        }
+      } catch (error) {
+        console.error("Error fetching user's data:", error.message);
+      }
+    };
+
+    // Fetch user data when component mounts
+    fetchUserData();
+  }, []); //  
 
   return (
     <Fragment>
