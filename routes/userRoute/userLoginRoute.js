@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwtGenerator = require("../../utils/jwtGenerator");
 const authorization = require("../../middleware/authorization");
 // Login Route
-router.post("/login",authorization, async (req, res) => {
+router.post("/login",async (req, res) => {
   try {
     // Destracture the req.body
     const { email, password } = req.body;
