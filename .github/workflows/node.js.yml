@@ -22,6 +22,9 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 18.133.221.125 >> ~/.ssh/known_hosts
 
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/todoapp-backend .
