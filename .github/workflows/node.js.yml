@@ -46,4 +46,6 @@ jobs:
               -e POSTGRES_HOST=${PG_HOST} \
               -e POSTGRES_USER=${PG_USER} \
               -e POSTGRES_PASSWORD=${PG_PASSWORD} \
+              -e POSTGRES_DATABASE=${PG_DATABASE} \
+              -e POSTGRES_PORT=${PG_PORT} \
               ${{ secrets.DOCKER_USERNAME }}/todoapp-backend
