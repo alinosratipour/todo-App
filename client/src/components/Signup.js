@@ -44,16 +44,21 @@ function Signup() {
         body: JSON.stringify(data),
       });
 
-      const parsedResponse = await response.json();
-      if (parsedResponse.token) {
-        localStorage.setItem("token", parsedResponse.token);
+      if (!response.ok) {
+        // If response is not ok, throw an error
+        throw new Error("Failed to signup");
+      } else {
+        console.log(response.body);
+        // Redirect to dashboard
         history.push("/dashboard");
         toast.success("You Registered Successfully");
-      } else {
-        toast.error("Something went wrong");
       }
+
+      // Show success message
     } catch (err) {
-      console.error(err.message);
+      console.error("Signup Error:", err.message);
+      // Show error message
+      toast.error("Something went wrong");
     }
   };
 

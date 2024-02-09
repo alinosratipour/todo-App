@@ -28,8 +28,11 @@ if (checkuser.rowCount) {
   );
 
  //generating our jwt token 
- const token = jwtGenerator(newuser.rows[0].id);
-   res.json({token})
+ //const token = jwtGenerator(newuser.rows[0].id);
+ const token = newuser.rows[0].id;
+
+  // res.json({token})
+   res.json({ token: token });
   //res.json({ "success": "New graduate is created", "graduate": newuser.rows[0] })
   
   } catch (err) {

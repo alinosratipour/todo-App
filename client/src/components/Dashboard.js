@@ -16,7 +16,6 @@ function Dashboard() {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("DATA",data);
           setName(data.firstname); 
         } else {
           console.error("Failed to fetch user's data");

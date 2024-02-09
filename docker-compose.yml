@@ -2,17 +2,21 @@ version: '3.8'
 
 services:
   frontend:
-    build: ./client    # Update the path to the frontend Dockerfile
+    build: ./client
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
+    volumes:
+      - ./client:/app  # Mount local frontend code directory into the container
+    environment:
+      - NODE_ENV=development
     restart: always
 
   backend:
-    image: ali008009/todoapp-backend
+    build: .  # Assuming backend code is in the root directory
     ports:
       - "5000:5000"
+    volumes:
+      - .:/app  # Mount local backend code directory into the container
     environment:
       - POSTGRES_HOST=${PG_HOST}
       - POSTGRES_USER=${PG_USER}
