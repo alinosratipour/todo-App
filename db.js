@@ -34,12 +34,12 @@ const connectionString = `postgresql://${process.env.POSTGRES_USER}:${process.en
 const pool = new Pool({
   connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
   ssl: isProduction
-    ? {
-        rejectUnauthorized: true,
-      }
-    : {
-        rejectUnauthorized: false,
-      },
+    // ? {
+    //     rejectUnauthorized: true,
+    //   }
+    // : {
+    //     rejectUnauthorized: false,
+    //   },
 });
 
 pool.on("connect", () => {

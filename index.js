@@ -12,8 +12,7 @@ const dashboard = require("./routes/dashboard/dashboardRoute.js");
 const verifyAuth = require("./routes/verifyjwt");
 //middelware
 
-
- app.use(cors());
+app.use(cors());
 app.use(express.json()); // allows access to req.body
 
 //app.use(express.static("./client/build"))
@@ -26,11 +25,9 @@ app.use("/", loginUser);
 ///app.use("/", verifyAuth);
 app.use("/", dashboard);
 
-if (process.env.NODE_ENV === "production") {
-  // serve static content
-  // npm run build
-  app.use(express.static(path.join(__dirname, "client/build")));
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, "client/build")));
+// }
 
 // get a todo
 app.get("/todos/:id", async (req, res) => {
@@ -60,9 +57,9 @@ app.delete("/todos/:id", async (req, res) => {
   }
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client/build/index.html"));
+// });
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`server running at port ${PORT}`);

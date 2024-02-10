@@ -2,16 +2,16 @@
 FROM node:14-alpine
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application code to the working directory
-COPY . .
+ COPY . .
 
 # Expose port 3000 to allow external access to the frontend
 EXPOSE 3000
