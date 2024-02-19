@@ -38,7 +38,7 @@ function Signup() {
 
   const onSubmitForm = async (data) => {
     try {
-      const response = await fetch("http://18.170.65.18::5000/signup", {
+      const response = await fetch("http://18.170.65.18:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
