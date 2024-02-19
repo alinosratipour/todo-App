@@ -33,7 +33,7 @@ jobs:
       - name: SSH into EC2 and update Docker container
         uses: appleboy/ssh-action@master
         with:
-          host: 18.133.221.125
+          host: 18.170.65.18
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
