@@ -20,4 +20,17 @@ router.get("/todos", async (req, res) => {
   }
 });
 
+
+router.delete("/todos/:id", async (req, res) => {
+  try {
+      const { id } = req.params;
+      // Perform deletion operation in the database using the id
+      await pool.query("DELETE FROM todo WHERE todo_id = $1", [id]);
+      res.json("Todo item deleted successfully");
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
