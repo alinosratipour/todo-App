@@ -13,7 +13,7 @@ router.get("/todos", async (req, res) => {
 //  );
  //res.json(user.rows[0]); 
 
-    const listtodos = await pool.query("SELECT * FROM mytodo");
+    const listtodos = await pool.query("SELECT * FROM todo");
     res.json(listtodos.rows);
   } catch (err) {
     console.error(err.message);
