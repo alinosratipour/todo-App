@@ -1,9 +1,6 @@
 # Use the official Node.js image as a base
 FROM node:14
 
-# Install PostgreSQL client tools
-RUN apt-get update && \
-    apt-get install -y postgresql-client
 
 # Set the working directory in the containerr
 WORKDIR /app
