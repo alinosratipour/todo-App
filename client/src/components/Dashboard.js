@@ -10,7 +10,7 @@ function Dashboard() {
     const fetchUserData = async () => {
       try {
        // const token = localStorage.getItem("token"); // Retrieve user ID from localStorage
-        const response = await fetch("http://18.133.221.125:5000/dashboard", {
+        const response = await fetch("http://18.170.65.18:5000/dashboard", {
           method: "GET",
           headers: { token: localStorage.token },
         });

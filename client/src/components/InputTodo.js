@@ -16,7 +16,7 @@ function InputTodo() {
 
     try {
       const body = { description };
-      await fetch("http://18.133.221.125:5000/todos", {
+      await fetch("http://18.170.65.18:5000/todos", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(body),

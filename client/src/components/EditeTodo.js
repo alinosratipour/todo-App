@@ -10,7 +10,7 @@ function EditeTodo({ todo }) {
     e.preventDefault();
     try {
       const body = { description };
-      await fetch(`http://18.133.221.125:5000/todos/${todo.todo_id}`, {
+      await fetch(`http://18.170.65.18:5000/todos/${todo.todo_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
