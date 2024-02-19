@@ -22,7 +22,7 @@ function Login() {
 
     try {
       const body = { email, password };
-      const response = await fetch("/login", {
+      const response = await fetch("http://18.170.65.18/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
