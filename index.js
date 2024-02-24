@@ -29,6 +29,9 @@ app.use("/", dashboard);
 //     app.use(express.static(path.join(__dirname, "client/build")));
 // }
 
+app.get("/", (req, res) => {
+  res.send("Welcome to EC2");
+});
 // get a todo
 app.get("/todos/:id", async (req, res) => {
   const { id } = req.params;
