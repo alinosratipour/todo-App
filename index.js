@@ -30,7 +30,7 @@ app.use("/", dashboard);
 // }
 
 app.get("/", (req, res) => {
-  res.send("Welcome to EC2 for CYF cloud module");
+  res.send("Welcome to EC2 for CYF cloud ");
 });
 // get a todo
 app.get("/todos/:id", async (req, res) => {
